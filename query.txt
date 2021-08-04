@@ -1,0 +1,49 @@
+3.1 Write the following queries in SQL, using the university schema. (We suggest you actually run these queries on a database, using the sample data
+that we provide on the Web site of the book, db-book.com. Instructions for
+setting up a database, and loading sample data, are provided on the above
+Web site.)
+a. Find the titles of courses in the Comp. Sci. department that have 3
+credits.
+b. Find the IDs of all students who were taught by an instructor named
+Einstein; make sure there are no duplicates in the result.
+c. Find the highest salary of any instructor.
+d. Find all instructors earning the highest salary (there may be more
+than one with the same salary).
+e. Find the enrollment of each section that was offered in Autumn 2009.
+f. Find the maximum enrollment, across all sections, in Autumn 2009.
+g. Find the sections that had the maximum enrollment in Autumn 2009.
+
+3.1-a> Select title from course where credits>3 and dept_name="Comp. Sci.";
+
+3.1-2> select distinct student.ID
+from (student join takes using(ID))
+join (instructor join teaches using(ID))
+using(course id, sec id, semester, year)
+where instructor.name = ’Einstein’
+
+3.1-c>select max(salary) from instructor;
+3.1-d>select ID, name from instructor where salary=(select max(salary) from instructor);
+3.1-e/f> select max(enrollment) from (select course_id,sec_id, count(id) as enrollment from section natural join takes where semester="Autumn" and year=2009
+        groupby course_id,sec_id);
+g>select sec_id from section join takes where enrollment = 
+
+
+2 Suppose you are given a relation grade points(grade, points), which provides
+a conversion from letter grades in the takes relation to numeric scores; for
+example an “A” grade could be specified to correspond to 4 points, an “A−”
+to 3.7 points, a “B+” to 3.3 points, a “B” to 3 points, and so on. The grade
+points earned by a student for a course offering (section) is defined as the
+number of credits for the course multiplied by the numeric points for the
+grade that the student received.
+Given the above relation, and our university schema, write each of the
+following queries in SQL. You can assume for simplicity that no takes tuple
+has the null value for grade.
+a. Find the total grade-points earned by the student with ID 12345,
+across all courses taken by the student.
+b. Find the grade-point average (GPA) for the above student, that is,
+the total grade-points divided by the total credits for the associated
+courses.
+c. Find the ID and the grade-point average of every student
+
+
+
