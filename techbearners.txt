@@ -240,7 +240,8 @@ select Salary from Worker order by Salary desc limit 0,n;
 Q-49. Write an SQL query to fetch departments along with the total salaries paid for each of them.
 
 select DEPARTMENT, sum(SALARY) from Worker group by DEPARTMENT;
-
+bhag ja bsdk   CHALA JA BHOSDI lekin sahi cheese hai bc ye bhi ABE YE QAZI SE SIKHA THA
+mtlb chat hi hai alag tarike se isko push mt krdiyo 
 DEPARTMENT	sum(SALARY)
 HR	400000
 Admin	980000
